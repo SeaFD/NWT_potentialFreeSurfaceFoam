@@ -1,0 +1,117 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs            (fvMotionSolvers);
+
+application     potentialFreeSurfaceDyMFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         12;
+
+deltaT          0.01;
+
+writeControl    adjustable;
+
+writeInterval   12;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+adjustTimeStep  yes;
+
+maxCo           0.0009765625;
+
+maxDeltaT       0.01;
+
+functions
+{
+
+
+    WG1
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   1;
+        log             yes;
+        writeTotalArea  no;
+        writeFields     no;
+        regionType      faceZone;
+        name            f1;
+        operation       areaAverage;
+        fields
+        (
+            zeta
+        );
+    }
+    
+
+    
+    WG3
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   1;
+        log             yes;
+        writeTotalArea  no;
+        writeFields     no;
+        regionType      faceZone;
+        name            f3;
+        operation       areaAverage;
+        fields
+        (
+            zeta
+        );
+    }
+    
+    WG4
+    {
+        type            surfaceFieldValue;
+        libs            (fieldFunctionObjects);
+        writeControl    timeStep;
+        writeInterval   1;
+        log             yes;
+        writeTotalArea  no;
+        writeFields     no;
+        regionType      faceZone;
+        name            f4;
+        operation       areaAverage;
+        fields
+        (
+            zeta
+        );
+    }
+};
+
+
+// ************************************************************************* //

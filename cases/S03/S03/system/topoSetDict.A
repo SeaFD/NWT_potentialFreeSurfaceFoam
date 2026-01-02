@@ -1,0 +1,149 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+actions
+(
+
+// WG1
+    {
+        name    f1FaceSet;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   freeSurface;
+    }
+
+    {
+        name    f1FaceSet;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (-1.81 -100 -100) (-1.79 100 100);
+    }
+
+    {
+        name    f1;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f1FaceSet;
+    }
+    
+    
+// WG2 
+    {
+        name    f2FaceSet;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   freeSurface;
+    }
+
+    {
+        name    f2FaceSet;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (-1.21 -100 -100) (-1.19 100 100);
+    }
+
+    {
+        name    f2;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f2FaceSet;
+    }
+    
+// WG3
+    {
+        name    f3FaceSet;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   freeSurface;
+    }
+
+    {
+        name    f3FaceSet;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (-0.61 -100 -100) (-0.59 100 100);
+    }
+
+    {
+        name    f3;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f3FaceSet;
+    }
+    
+    
+// WG4
+    {
+        name    f4FaceSet;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   freeSurface;
+    }
+
+    {
+        name    f4FaceSet;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (0.59 -100 -100) (0.61 100 100);
+    }
+
+    {
+        name    f4;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f4FaceSet;
+    }
+    
+// WG11
+    {
+        name    f11FaceSet;
+        type    faceSet;
+        action  new;
+        source  patchToFace;
+        patch   freeSurface;
+    }
+
+    {
+        name    f11FaceSet;
+        type    faceSet;
+        action  subset;
+        source  boxToFace;
+        box     (-0.01 -100 -100) (0.01 100 100);
+    }
+
+    {
+        name    f11;
+        type    faceZoneSet;
+        action  new;
+        source  setToFaceZone;
+        faceSet f11FaceSet;
+    }
+);
+
+
+// ************************************************************************* //

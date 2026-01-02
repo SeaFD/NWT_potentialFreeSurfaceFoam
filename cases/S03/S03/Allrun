@@ -1,0 +1,54 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+runApplication blockMesh
+
+cp system/extrudeMeshDict.Right system/extrudeMeshDict
+extrudeMesh > log.extrudeRight
+
+
+cp system/topoSetDict.Q system/topoSetDict
+topoSet > log.topoQ
+cp system/refineMeshDict.1 system/refineMeshDict
+refineMesh -overwrite > log.refineQ
+
+cp system/topoSetDict.0 system/topoSetDict
+topoSet > log.topo0
+cp system/refineMeshDict.1 system/refineMeshDict
+refineMesh -overwrite > log.refine0
+
+cp system/topoSetDict.1 system/topoSetDict
+topoSet > log.topo1
+cp system/refineMeshDict.1 system/refineMeshDict
+refineMesh -overwrite > log.refine1
+
+cp system/topoSetDict.2 system/topoSetDict
+topoSet > log.topo2
+refineMesh -overwrite > log.refine2
+
+cp system/topoSetDict.A system/topoSetDict
+runApplication -s 1 topoSet
+
+restore0Dir
+
+runApplication decomposePar
+runApplication renumberMesh -overwrite
+
+runParallel $(getApplication)
+
+# Require awk
+
+awk '{print $1 " " $3}' postProcessing/WG1/0/surfaceFieldValue.dat > WG1.mat
+sed -i s/"#"/"%"/g WG1.mat 
+
+
+awk '{print $1 " " $3}' postProcessing/WG3/0/surfaceFieldValue.dat > WG3.mat
+sed -i s/"#"/"%"/g WG3.mat 
+
+awk '{print $1 " " $3}' postProcessing/WG4/0/surfaceFieldValue.dat > WG4.mat
+sed -i s/"#"/"%"/g WG4.mat 
+
+
+#------------------------------------------------------------------------------
