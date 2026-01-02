@@ -23,8 +23,7 @@ unzip S03.zip && cd S03
 source /path/to/OpenFOAM/etc/bashrc
 
 # Run simulation
-blockMesh
-potentialFreeSurfaceFoam
+./Allrun
 
 # Visualize
 paraFoam
@@ -32,7 +31,7 @@ paraFoam
 
 ## Requirements
 
-- OpenFOAM v2406 or later
+- OpenFOAM v2312 or later
 - ParaView for visualization
 - Python 3.x for post-processing
 
@@ -46,7 +45,7 @@ GNU GPL v3.0 - required for OpenFOAM compatibility. See [LICENSE](LICENSE).
 
 ## Author
 
-**Joshua Davidson**  
+**Josh Davidson**  
 ORCID: [0000-0001-5966-4272](https://orcid.org/0000-0001-5966-4272)
 
 ## Related
