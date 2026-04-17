@@ -1,0 +1,46 @@
+#!/bin/sh
+cd "${0%/*}" || exit                                # Run from this directory
+. ${WM_PROJECT_DIR:?}/bin/tools/RunFunctions        # Tutorial run functions
+#------------------------------------------------------------------------------
+
+runApplication blockMesh
+
+cp system/extrudeMeshDict.Right system/extrudeMeshDict
+extrudeMesh > log.extrudeRight
+
+
+cp system/topoSetDict.1 system/topoSetDict
+topoSet > log.topo1
+cp system/refineMeshDict.1 system/refineMeshDict
+refineMesh -overwrite > log.refine1
+
+cp system/topoSetDict.2 system/topoSetDict
+topoSet > log.topo2
+refineMesh -overwrite > log.refine2
+
+cp system/topoSetDict.3 system/topoSetDict
+topoSet > log.topo3
+refineMesh -overwrite > log.refine3
+
+cp system/topoSetDict.4 system/topoSetDict
+topoSet > log.topo4
+cp system/refineMeshDict.2 system/refineMeshDict
+refineMesh -overwrite > log.refine4
+
+
+cp system/topoSetDict.5 system/topoSetDict
+topoSet > log.topo5
+cp system/refineMeshDict.2 system/refineMeshDict
+refineMesh -overwrite > log.refine5
+
+restore0Dir
+
+runApplication setFields 
+
+runApplication decomposePar
+renumberMesh -overwrite
+
+runParallel $(getApplication)
+
+
+#------------------------------------------------------------------------------
